@@ -8,6 +8,7 @@ public class PickupObject : MonoBehaviour
     [SerializeField] private float pickupDistance = 3f; // que tan lejos puede llegar el jugador para recoger algo
 
     private GameObject pickedObject = null; // que tenemos en la mano
+    private Rigidbody pickedObjectRb = null;
 
     void Update()
     {
@@ -24,8 +25,10 @@ public class PickupObject : MonoBehaviour
         else
         {
             //ya tienes algo en la mano
-
-            Drop();
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+              Drop();
+            }
         }
     }
 
@@ -46,15 +49,31 @@ public class PickupObject : MonoBehaviour
 
     private void PickUp(GameObject objectToPickUp)
     {
-        objectToPickUp.transform.SetParent(handPoint);
-        objectToPickUp.transform.localPosition = Vector3.zero;
-
         pickedObject = objectToPickUp;
+        pickedObjectRb = pickedObject.GetComponent<Rigidbody>();
+
+        if (pickedObjectRb != null)
+        {
+            pickedObjectRb.isKinematic = true; //Controla si la fisica afecta al rb del objeto
+            pickedObjectRb.linearVelocity = Vector3.zero; //representa el cambio de la posicion, aqui ando convirtiendolo al vector3 osea x,y,z
+            pickedObjectRb.angularVelocity = Vector3.zero;
+        }
+
+        pickedObject.transform.SetParent(handPoint);
+
+        pickedObject.transform.localPosition = Vector3.zero;
+        //pickedObject.transform.localRotation = Quaternion.identity;
     }
 
    private void Drop()
     {
-        pickedObject.transform.SetParent(null);
+        pickedObject.transform.SetParent(null); //deja de ser hijo de la mano
+
+        if (pickedObjectRb != null)
+        {
+            pickedObjectRb.isKinematic=false; //reactivamos las fisicas del objeto para que se caiga
+
+        }
         pickedObject = null;
     }
 }
