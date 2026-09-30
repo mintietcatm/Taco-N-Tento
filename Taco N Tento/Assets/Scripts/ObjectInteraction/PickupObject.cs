@@ -8,33 +8,116 @@ public class PickupObject : MonoBehaviour
     [SerializeField] private float pickupDistance = 3f; // que tan lejos puede llegar el jugador para recoger algo
     [SerializeField] private LayerMask placeableLayer;
 
+    [SerializeField] private Material validMaterial;
+    [SerializeField] private Material invalidMaterial;
+    private Renderer pickedObjectRenderer;
+    private Material originalMaterial = null;  //el material original
+
     private GameObject pickedObject = null; // que tenemos en la mano
     private Rigidbody pickedObjectRb = null;
+    private BoxCollider pickedObjectCollider = null; // El collider del objeto que estamos agarrando
+    PlacementState currentState = PlacementState.EmptyHanded; //pa que el jugador empieze con las manos vacias
 
-    
+
+
+
     private void Awake()
     {
         placeableLayer = LayerMask.GetMask("PlaceableSurface");
     }
     void Update()
     {
-        if (pickedObject == null)
+        switch (currentState)
         {
-            //puedes recoger cosas. tienes las manos vacias
-            if (Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                TryPickUp();
-            }
+            case PlacementState.EmptyHanded:
+                Debug.Log("EmptyHanded");
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    TryPickUp();
+                }
 
-        }
+                break;
+            case PlacementState.Holding:
+                Debug.Log("Holding");
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    Drop();
+                }
+                if (Mouse.current.rightButton.wasPressedThisFrame)
+                {
+                    pickedObject.transform.SetParent(null);
+                    currentState = PlacementState.Placing;
+                }
+                break;
 
-        else
-        {
-            //ya tienes algo en la mano
-            if (Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                Drop();
-            }
+            case PlacementState.Placing:
+                Debug.Log("Placing");
+                if (Mouse.current.rightButton.wasPressedThisFrame)
+                {
+                    pickedObject.transform.SetParent(handPoint);
+                    pickedObject.transform.localPosition = Vector3.zero;
+                    currentState = PlacementState.Holding;
+                }
+                RaycastHit hit;
+
+                if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickupDistance, placeableLayer))
+                {
+                    pickedObject.transform.position = hit.point;
+
+                    Collider[] overlaps;
+                    Vector3 overlapCenter = pickedObject.transform.TransformPoint(pickedObjectCollider.center); //Donde esta el centro en coordenadas del mundo (por eso Vector3) 
+                    Vector3 halfExtents = Vector3.Scale(pickedObjectCollider.size, pickedObject.transform.lossyScale) / 2; //lossyScale considera la escala aproximada final en el mundo, no de los padres
+
+                    bool canPlace = true;
+
+                    overlaps = Physics.OverlapBox(overlapCenter, halfExtents, pickedObject.transform.rotation);
+
+                    foreach (Collider collider in overlaps) // FOR EACH por cada COLLIDER elemento de tipo Collider durante esta vuelta COLLIDER le voy a llamar collider IN  dentro del array
+                    {
+                        if (collider==pickedObjectCollider)
+                        {
+                            continue; //continue literalmente le dice al codigo que siga avanzando
+                        }
+                        
+                        if (collider == hit.collider)
+                        {
+                            continue;
+                        }
+
+                        canPlace = false;
+                        Debug.Log(collider.gameObject.name);
+                        Debug.Log("Colliders encontrados " + overlaps.Length); //Length singifica cuantos elementos hay en el Array (los [] en Collider)
+
+                    }
+                    if (canPlace==true)
+                    {
+                        pickedObjectRenderer.material = validMaterial;
+                    }
+                    else
+                    {
+                        pickedObjectRenderer.material = invalidMaterial;
+                    }
+
+                    if (Mouse.current.leftButton.wasPressedThisFrame&&canPlace==true)
+                    {
+                        currentState=PlacementState.EmptyHanded;
+
+                        pickedObjectRenderer.material=originalMaterial;
+                        pickedObject = null;
+                        pickedObjectRb=null;
+                        pickedObjectCollider=null;
+                        pickedObjectRenderer=null;
+                    }
+                    Debug.Log("colocar " + canPlace);
+                    //Debug.Log(hit.point);
+
+                }
+
+                break;
+
+            default:
+                return;
+
         }
     }
 
@@ -57,15 +140,20 @@ public class PickupObject : MonoBehaviour
     {
         pickedObject = objectToPickUp;
         pickedObjectRb = pickedObject.GetComponent<Rigidbody>();
+        pickedObjectCollider = pickedObject.GetComponent<BoxCollider>();
+        pickedObjectRenderer = pickedObject.GetComponent<Renderer>();
+        originalMaterial = pickedObjectRenderer.material; //Aqui se guarda el material original del objeto, para no tener que asignarlo manualmente en el inspector
 
         if (pickedObjectRb != null)
         {
-            pickedObjectRb.isKinematic = true; //Controla si la fisica afecta al rb del objeto
-            pickedObjectRb.linearVelocity = Vector3.zero; //representa el cambio de la posicion, aqui ando convirtiendolo al vector3 osea x,y,z
+            pickedObjectRb.linearVelocity = Vector3.zero; //representa el cambio de la posicion, la velocidad en xyz ahora es 0
             pickedObjectRb.angularVelocity = Vector3.zero;
+            pickedObjectRb.isKinematic = true; //Controla si la fisica afecta al rb del objeto
         }
 
         pickedObject.transform.SetParent(handPoint);
+        pickedObject.transform.localRotation = Quaternion.identity;
+        currentState = PlacementState.Holding;
 
         pickedObject.transform.localPosition = Vector3.zero;
         //pickedObject.transform.localRotation = Quaternion.identity;
@@ -73,46 +161,17 @@ public class PickupObject : MonoBehaviour
 
     private void Drop()
     {
-        RaycastHit hit;
+        pickedObject.transform.SetParent(null); //deja de ser hijo de la mano. sueltas la tortilla
 
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickupDistance, placeableLayer))
+        if (pickedObjectRb != null) //comprueba si tiene un rigidbody
         {
-            if (hit.collider.CompareTag("PlacementSurface"))
-            {
-                Transform surface = hit.collider.transform;
-                PlacementPoint[] puntos = surface.GetComponentsInChildren<PlacementPoint>();
-                Debug.Log("Raycast toco la mesa");
-
-                foreach (PlacementPoint slot in puntos)
-                {
-                    Debug.Log(slot.gameObject.name);
-                    //if (slot.IsOccupied(!true))
-                    //{
-                    //    pickedObject.transform.SetParent(slot);
-                    //    pickedObject.transform.localPosition = Vector3.zero;
-                    //    pickedObjectRb.isKinematic = false;
-                    //    pickedObject = null; //Registra que ya no traemos nada en la mano
-
-                    //}
-
-                }
-
-                return;
-
-            }
-
-        }
-
-
-
-        if (pickedObjectRb != null)
-        {
-            pickedObject.transform.SetParent(null); //deja de ser hijo de la mano
             pickedObjectRb.isKinematic = false; //reactivamos las fisicas del objeto para que se caiga
-
         }
         pickedObject = null;
-
+        pickedObjectRb = null; //Para que el codigo no se quede con la informacion
+        pickedObjectCollider = null;
+        currentState = PlacementState.EmptyHanded;
+        Debug.Log("Estado actual: " + currentState);
     }
 
 }
