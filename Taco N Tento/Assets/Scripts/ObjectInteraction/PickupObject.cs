@@ -127,7 +127,7 @@ public class PickupObject : MonoBehaviour
 
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickupDistance))
         {
-            if (hit.collider.CompareTag("Ingrediente"))
+            if (hit.collider.CompareTag("Interactuable"))
             {
                 PickUp(hit.collider.gameObject);
             }

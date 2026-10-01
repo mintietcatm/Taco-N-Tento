@@ -19739,9 +19739,9 @@ GameObject:
   - component: {fileID: 2142978839}
   - component: {fileID: 2142978838}
   - component: {fileID: 2142978837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cubo todo feo de prueba
-  m_TagString: Untagged
+  m_TagString: PlacementSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19877,7 +19877,7 @@ GameObject:
   - component: {fileID: 8174792506149373376}
   m_Layer: 0
   m_Name: Tortilla
-  m_TagString: Ingrediente
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

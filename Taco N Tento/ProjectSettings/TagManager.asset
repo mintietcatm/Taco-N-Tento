@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ingrediente
   - PlacementSurface
+  - Interactuable
   layers:
   - Default
   - TransparentFX

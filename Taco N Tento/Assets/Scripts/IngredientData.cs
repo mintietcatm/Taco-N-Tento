@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class IngredientData : MonoBehaviour
+[CreateAssetMenu(fileName = "Ingrediente", menuName = "Nuevo Ingrediente /Crear PORCION (Ingrediente Preparado) Scriptable Object")]
+public class IngredientData : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private string Nombre;
+    [SerializeField] private float Precio;
+    [SerializeField] private string Descripcion;
+    [SerializeField] private Sprite Icono;
+    [SerializeField] TipoDeIngrediente ingredienteActual;
+    [SerializeField] private GameObject Modelo;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }
