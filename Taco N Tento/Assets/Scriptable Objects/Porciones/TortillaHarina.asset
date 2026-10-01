@@ -15,6 +15,6 @@ MonoBehaviour:
   Nombre: Tortilla de Harina
   Precio: 3
   Descripcion: 'Una tortilla de harina. '
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: 5db7cea3acf4cae478e734007d6fa23e, type: 3}
   ingredienteActual: 3
   Modelo: {fileID: 0}

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30e9f9e46dafb3e47b5586957c4b6c4e, type: 3}
-  m_Name: TortillaMaiz
+  m_Name: MedioLimon
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  Nombre: "Tortilla de Ma\xEDz"
+  Nombre: "Mitad de Lim\xF3n"
   Precio: 1
-  Descripcion: "Una tortilla de ma\xEDz. Est\xE1 solita, acompa\xF1ala con algo"
-  Icono: {fileID: 21300000, guid: 29ddef8cafc802d41a2582ef6ee063ea, type: 3}
-  ingredienteActual: 2
+  Descripcion: "Medio lim\xF3n. Bien jugoso"
+  Icono: {fileID: 21300000, guid: 9b1297211d384b4408915e1d215261d6, type: 3}
+  ingredienteActual: 6
   Modelo: {fileID: 0}

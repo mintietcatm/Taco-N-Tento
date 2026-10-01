@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 974b198f522a0ac4d8a0399736e0b99c, type: 3}
-  m_Name: QuesoEntero
+  m_Name: ManojoDeCilantro
   m_EditorClassIdentifier: Assembly-CSharp::ProductData
-  Nombre: Queso Asadero
-  Precio: 60
-  Descripcion: Pieza de Queso Asadero, si lo rallas rinde mas
-  Icono: {fileID: 21300000, guid: f40e4dcddb849a242b958f6efcc8b5ca, type: 3}
-  productoActual: 4
+  Nombre: Manojo de Cilantro
+  Precio: 15
+  Descripcion: "Manojo entero de cilantro... \xBFSeguro que no es perejil? "
+  Icono: {fileID: 21300000, guid: 5e5ce5e85b727bf409cffe6b5fcfa069, type: 3}
+  productoActual: 7
   Modelo: {fileID: 0}
-  IngredienteResultado: {fileID: 11400000, guid: db96b684cd05b4b4c887add7fe5ba8e7, type: 2}
-  CantidadProducidad: 4
+  IngredienteResultado: {fileID: 11400000, guid: e4d50fbeea103f34aa56427edae50a05, type: 2}
+  CantidadProducidad: 10

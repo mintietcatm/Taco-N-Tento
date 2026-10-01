@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e9f9e46dafb3e47b5586957c4b6c4e, type: 3}
   m_Name: PorcionCebolla
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  Nombre: 
-  Precio: 0
-  Descripcion: 
-  Icono: {fileID: 0}
-  ingredienteActual: 0
+  Nombre: "Porci\xF3n de Cebolla"
+  Precio: 3
+  Descripcion: "Cebolla partida en julianas, lista para acompa\xF1ar un buen taquito"
+  Icono: {fileID: 21300000, guid: 28ea6338d16c3ed46b13fe024ee7e77e, type: 3}
+  ingredienteActual: 5
   Modelo: {fileID: 0}

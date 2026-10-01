@@ -15,6 +15,6 @@ MonoBehaviour:
   Nombre: Porcion de Queso
   Precio: 15
   Descripcion: Queso rallado, para armar unas quesadillas bien sabrosas
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: 0df7c0aba16167d44a3e708ac132a35a, type: 3}
   ingredienteActual: 4
   Modelo: {fileID: 0}

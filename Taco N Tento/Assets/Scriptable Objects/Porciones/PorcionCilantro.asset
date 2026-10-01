@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30e9f9e46dafb3e47b5586957c4b6c4e, type: 3}
-  m_Name: TortillaMaiz
+  m_Name: PorcionCilantro
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  Nombre: "Tortilla de Ma\xEDz"
-  Precio: 1
-  Descripcion: "Una tortilla de ma\xEDz. Est\xE1 solita, acompa\xF1ala con algo"
-  Icono: {fileID: 21300000, guid: 29ddef8cafc802d41a2582ef6ee063ea, type: 3}
-  ingredienteActual: 2
+  Nombre: "Porci\xF3n de Cilantro"
+  Precio: 2
+  Descripcion: "Porci\xF3n de cilantro. Si, ya revis\xE9 que es cilantro."
+  Icono: {fileID: 21300000, guid: 912674cfd6182a54bb959e8eff396735, type: 3}
+  ingredienteActual: 7
   Modelo: {fileID: 0}

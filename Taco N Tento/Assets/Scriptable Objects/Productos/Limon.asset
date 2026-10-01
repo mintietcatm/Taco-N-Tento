@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 974b198f522a0ac4d8a0399736e0b99c, type: 3}
-  m_Name: QuesoEntero
+  m_Name: Limon
   m_EditorClassIdentifier: Assembly-CSharp::ProductData
-  Nombre: Queso Asadero
-  Precio: 60
-  Descripcion: Pieza de Queso Asadero, si lo rallas rinde mas
-  Icono: {fileID: 21300000, guid: f40e4dcddb849a242b958f6efcc8b5ca, type: 3}
-  productoActual: 4
+  Nombre: "Lim\xF3n"
+  Precio: 2
+  Descripcion: "Un lim\xF3n entero"
+  Icono: {fileID: 21300000, guid: e84009ca845c3c54c8b31973b5b1e1cd, type: 3}
+  productoActual: 6
   Modelo: {fileID: 0}
-  IngredienteResultado: {fileID: 11400000, guid: db96b684cd05b4b4c887add7fe5ba8e7, type: 2}
-  CantidadProducidad: 4
+  IngredienteResultado: {fileID: 11400000, guid: a983023e6e41edf4281ea3319914cc9b, type: 2}
+  CantidadProducidad: 2

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974b198f522a0ac4d8a0399736e0b99c, type: 3}
   m_Name: CebollaEntera
   m_EditorClassIdentifier: Assembly-CSharp::ProductData
-  Nombre: 
-  Precio: 0
-  Descripcion: 
+  Nombre: Cebolla Entera
+  Precio: 10
+  Descripcion: Cebolla entera, intenta cortarla sin llorar
   Icono: {fileID: 0}
-  productoActual: 0
+  productoActual: 5
   Modelo: {fileID: 0}
-  IngredienteResultado: {fileID: 0}
-  CantidadProducidad: 0
+  IngredienteResultado: {fileID: 11400000, guid: 628f420b4b58ae84690fd333627b1ffd, type: 2}
+  CantidadProducidad: 4

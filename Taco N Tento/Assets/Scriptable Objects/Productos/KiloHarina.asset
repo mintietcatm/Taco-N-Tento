@@ -15,7 +15,7 @@ MonoBehaviour:
   Nombre: Kilo de Tortillas de Harina
   Precio: 65
   Descripcion: Un kilo de tortillas de harina. Tienen un rico sabor casero...
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: 4aca28d4acc2a844b9f874ac27403481, type: 3}
   productoActual: 0
   Modelo: {fileID: 0}
   IngredienteResultado: {fileID: 11400000, guid: 9ab9c70a76e47084592a819897ecd376, type: 2}

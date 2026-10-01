@@ -16,7 +16,7 @@ MonoBehaviour:
   Precio: 30
   Descripcion: "Un kilo de tortillas de ma\xEDz delgaditas. Ideales para poner con
     copia"
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: 459f0bb6ae01d5049b6da72e26e0a13c, type: 3}
   productoActual: 2
   Modelo: {fileID: 0}
   IngredienteResultado: {fileID: 11400000, guid: d8db72c82d62f2b4ba816ae6f5d833c4, type: 2}
