@@ -17,6 +17,6 @@ MonoBehaviour:
   Descripcion: "Manojo entero de cilantro... \xBFSeguro que no es perejil? "
   Icono: {fileID: 21300000, guid: 5e5ce5e85b727bf409cffe6b5fcfa069, type: 3}
   productoActual: 7
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 8023119817028313478, guid: 2f724a90f66e2564c9e55653eddb3321, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: e4d50fbeea103f34aa56427edae50a05, type: 2}
   CantidadProducidad: 10

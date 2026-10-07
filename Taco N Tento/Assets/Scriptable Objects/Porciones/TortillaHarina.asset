@@ -17,4 +17,4 @@ MonoBehaviour:
   Descripcion: 'Una tortilla de harina. '
   Icono: {fileID: 21300000, guid: 5db7cea3acf4cae478e734007d6fa23e, type: 3}
   ingredienteActual: 3
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 50577053407998225, guid: d11c34a9f01dfc0468000063c95d50ab, type: 3}

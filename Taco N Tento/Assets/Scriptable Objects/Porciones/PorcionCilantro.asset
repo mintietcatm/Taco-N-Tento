@@ -17,4 +17,4 @@ MonoBehaviour:
   Descripcion: "Porci\xF3n de cilantro. Si, ya revis\xE9 que es cilantro."
   Icono: {fileID: 21300000, guid: 912674cfd6182a54bb959e8eff396735, type: 3}
   ingredienteActual: 7
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 3593959951778955410, guid: 5aff2552de227b24e8fd59cd6f6eafd9, type: 3}

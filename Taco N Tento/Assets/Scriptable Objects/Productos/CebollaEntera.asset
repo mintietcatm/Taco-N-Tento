@@ -15,8 +15,8 @@ MonoBehaviour:
   Nombre: Cebolla Entera
   Precio: 10
   Descripcion: Cebolla entera, intenta cortarla sin llorar
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: a5984de7b65842e4790601842482b9cb, type: 3}
   productoActual: 5
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 7173286224557648163, guid: 363f3ea17da354e439a2fa3d0d6abb8d, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: 628f420b4b58ae84690fd333627b1ffd, type: 2}
   CantidadProducidad: 4

@@ -17,4 +17,4 @@ MonoBehaviour:
   Descripcion: "Medio lim\xF3n. Bien jugoso"
   Icono: {fileID: 21300000, guid: 9b1297211d384b4408915e1d215261d6, type: 3}
   ingredienteActual: 6
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 943468687581795232, guid: 9215a005f44b1e842be373be269b1663, type: 3}

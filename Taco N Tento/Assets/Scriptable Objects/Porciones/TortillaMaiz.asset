@@ -17,4 +17,4 @@ MonoBehaviour:
   Descripcion: "Una tortilla de ma\xEDz. Est\xE1 solita, acompa\xF1ala con algo"
   Icono: {fileID: 21300000, guid: 29ddef8cafc802d41a2582ef6ee063ea, type: 3}
   ingredienteActual: 2
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 5560921433546862358, guid: d0ac77fe29493be47a23313fa1d85dc5, type: 3}

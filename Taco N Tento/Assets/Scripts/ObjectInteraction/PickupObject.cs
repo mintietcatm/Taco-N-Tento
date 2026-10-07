@@ -18,7 +18,7 @@ public class PickupObject : MonoBehaviour
     private BoxCollider pickedObjectCollider = null; // El collider del objeto que estamos agarrando
     PlacementState currentState = PlacementState.EmptyHanded; //pa que el jugador empieze con las manos vacias
 
-
+  
 
 
     private void Awake()
@@ -129,6 +129,8 @@ public class PickupObject : MonoBehaviour
         {
             if (hit.collider.CompareTag("Interactuable"))
             {
+               
+                             
                 PickUp(hit.collider.gameObject);
             }
             Debug.Log(hit.collider.gameObject.name);

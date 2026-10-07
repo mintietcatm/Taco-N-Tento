@@ -17,6 +17,6 @@ MonoBehaviour:
   Descripcion: Carne para preparar tacos. Rinde 15 tacos por pieza.
   Icono: {fileID: 0}
   productoActual: 0
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 3905836646948045299, guid: faece6ae68a0c7145bb42391952a944a, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: 790713e11571d2244821a4801e0ff4ce, type: 2}
   CantidadProducidad: 15

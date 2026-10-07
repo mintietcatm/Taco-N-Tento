@@ -17,4 +17,4 @@ MonoBehaviour:
   Descripcion: "Cebolla partida en julianas, lista para acompa\xF1ar un buen taquito"
   Icono: {fileID: 21300000, guid: 28ea6338d16c3ed46b13fe024ee7e77e, type: 3}
   ingredienteActual: 5
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 4889301765196565197, guid: 2c21b50e36e6ac9449e68d5019a657ae, type: 3}

@@ -17,4 +17,4 @@ MonoBehaviour:
   Descripcion: "Trocitos de pi\xF1a."
   Icono: {fileID: 21300000, guid: dc36b4ceb3472ef42839b632d889df49, type: 3}
   ingredienteActual: 8
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 5447555768924928778, guid: 41924e5b2decd5b4c8325b83a01f2e13, type: 3}

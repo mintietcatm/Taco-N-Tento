@@ -17,6 +17,6 @@ MonoBehaviour:
   Descripcion: Un kilo de tortillas de harina. Tienen un rico sabor casero...
   Icono: {fileID: 21300000, guid: 4aca28d4acc2a844b9f874ac27403481, type: 3}
   productoActual: 0
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 7030574955461531792, guid: efe1a61cf57ef694fb2ff090b7371b74, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: 9ab9c70a76e47084592a819897ecd376, type: 2}
   CantidadProducidad: 25

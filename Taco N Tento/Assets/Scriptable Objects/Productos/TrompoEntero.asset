@@ -17,6 +17,6 @@ MonoBehaviour:
   Descripcion: Un trompo de carne al pastor. Rinde para 50 porciones.
   Icono: {fileID: 0}
   productoActual: 1
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 7008734283559799520, guid: 19097632ff1e57e46923a88846594c3f, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: c60765f624b2f954aad1288fa337c55c, type: 2}
   CantidadProducidad: 50

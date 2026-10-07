@@ -17,4 +17,4 @@ MonoBehaviour:
   Descripcion: "Porci\xF3n de carne, lista para cocinar"
   Icono: {fileID: 0}
   ingredienteActual: 0
-  Modelo: {fileID: 0}
+  Modelo: {fileID: 3200063340494301517, guid: 5251e2b6c33be3d469a5033e06347aae, type: 3}
