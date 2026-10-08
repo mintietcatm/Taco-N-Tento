@@ -7,9 +7,13 @@ public class ItemNameHUD : MonoBehaviour
 
     public void Start()
     {
-    ItemNameTxt.text = "Hola";
+    ItemNameTxt.text = "Test";
         
     }
     
+    public void DisplayItemName(string itemName)
+    {
+
+    }
    
 }

@@ -25,6 +25,10 @@ public class PickupObject : MonoBehaviour
     {
         placeableLayer = LayerMask.GetMask("PlaceableSurface");
     }
+
+    //Sacar del update todo menos el raycast para que no se este ejecutando constantemente
+    // dividirlo por metodo y solo llamarlo cuando es necesario
+
     void Update()
     {
         switch (currentState)
