@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 public class PickupObject : MonoBehaviour
 {
     [SerializeField] private Transform handPoint; //punto de donde la recojo
-    [SerializeField] private Camera playerCamera; // la camara del jugador para lanzar el Raycast
-    [SerializeField] private float pickupDistance = 3f; // que tan lejos puede llegar el jugador para recoger algo
     [SerializeField] private LayerMask placeableLayer;
 
     [SerializeField] private Material validMaterial;
@@ -18,7 +16,10 @@ public class PickupObject : MonoBehaviour
     private BoxCollider pickedObjectCollider = null; // El collider del objeto que estamos agarrando
     PlacementState currentState = PlacementState.EmptyHanded; //pa que el jugador empieze con las manos vacias
 
-  
+    [SerializeField] private RaycastDetector raycastDetector; //referenciamos el raycast de RaycastDetector para no tener que hacer otro aqui
+    [SerializeField] private float rotationVal = 15f;
+
+
 
 
     private void Awake()
@@ -26,8 +27,6 @@ public class PickupObject : MonoBehaviour
         placeableLayer = LayerMask.GetMask("PlaceableSurface");
     }
 
-    //Sacar del update todo menos el raycast para que no se este ejecutando constantemente
-    // dividirlo por metodo y solo llamarlo cuando es necesario
 
     void Update()
     {
@@ -49,8 +48,7 @@ public class PickupObject : MonoBehaviour
                 }
                 if (Mouse.current.rightButton.wasPressedThisFrame)
                 {
-                    pickedObject.transform.SetParent(null);
-                    currentState = PlacementState.Placing;
+                    StartPlacing();
                 }
                 break;
 
@@ -58,59 +56,22 @@ public class PickupObject : MonoBehaviour
                 Debug.Log("Placing");
                 if (Mouse.current.rightButton.wasPressedThisFrame)
                 {
-                    pickedObject.transform.SetParent(handPoint);
-                    pickedObject.transform.localPosition = Vector3.zero;
-                    currentState = PlacementState.Holding;
+                    CancelPlacing();
+                    break;
                 }
+                RotateObject();
                 RaycastHit hit;
 
-                if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickupDistance, placeableLayer))
+                if (raycastDetector.DetectSurface(placeableLayer, out hit))
                 {
                     pickedObject.transform.position = hit.point;
 
-                    Collider[] overlaps;
-                    Vector3 overlapCenter = pickedObject.transform.TransformPoint(pickedObjectCollider.center); //Donde esta el centro en coordenadas del mundo (por eso Vector3) 
-                    Vector3 halfExtents = Vector3.Scale(pickedObjectCollider.size, pickedObject.transform.lossyScale) / 2; //lossyScale considera la escala aproximada final en el mundo, no de los padres
+                    bool canPlace = CheckCollisions(hit); // llamamos al metodo que revisa los colliders
+                    UpdateMaterial(canPlace); // llamamos al metodo que tiene los materiales
 
-                    bool canPlace = true;
-
-                    overlaps = Physics.OverlapBox(overlapCenter, halfExtents, pickedObject.transform.rotation);
-
-                    foreach (Collider collider in overlaps) // FOR EACH por cada COLLIDER elemento de tipo Collider durante esta vuelta COLLIDER le voy a llamar collider IN  dentro del array
+                    if (Mouse.current.leftButton.wasPressedThisFrame && canPlace == true)
                     {
-                        if (collider==pickedObjectCollider)
-                        {
-                            continue; //continue literalmente le dice al codigo que siga avanzando
-                        }
-                        
-                        if (collider == hit.collider)
-                        {
-                            continue;
-                        }
-
-                        canPlace = false;
-                        Debug.Log(collider.gameObject.name);
-                        Debug.Log("Colliders encontrados " + overlaps.Length); //Length singifica cuantos elementos hay en el Array (los [] en Collider)
-
-                    }
-                    if (canPlace==true)
-                    {
-                        pickedObjectRenderer.material = validMaterial;
-                    }
-                    else
-                    {
-                        pickedObjectRenderer.material = invalidMaterial;
-                    }
-
-                    if (Mouse.current.leftButton.wasPressedThisFrame&&canPlace==true)
-                    {
-                        currentState=PlacementState.EmptyHanded;
-
-                        pickedObjectRenderer.material=originalMaterial;
-                        pickedObject = null;
-                        pickedObjectRb=null;
-                        pickedObjectCollider=null;
-                        pickedObjectRenderer=null;
+                        ConfirmPlacement();
                     }
                     Debug.Log("colocar " + canPlace);
                     //Debug.Log(hit.point);
@@ -125,16 +86,29 @@ public class PickupObject : MonoBehaviour
         }
     }
 
+    private void RotateObject() //para rotar con el mouse
+    {
+        float scroll = Mouse.current.scroll.ReadValue().y;
+
+        if (scroll != 0)
+        {
+            pickedObject.transform.Rotate(0, scroll * rotationVal, 0, Space.World); // el mouse tiene 3 valores. Solamente lo vamos a rotar en Y por eso x esta en 0 igual que z
+            // ( 0 - es el valor de x, scroll es el valor del mousewheel * rptationVal - esto es el valor de la y donde va a rotar el item, 0 - es el valor de z, 
+            //Space.World le aplica la transformacion a los ejes del mundo no del game object)
+        }
+
+        Debug.Log("Scroll: " + scroll);
+    }
+
     private void TryPickUp()
     {
-        RaycastHit hit;
 
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickupDistance))
+        if (raycastDetector.Hit())
         {
+            RaycastHit hit = raycastDetector.GetHit(); // usando el raycast de RaycastDectector
             if (hit.collider.CompareTag("Interactuable"))
             {
-               
-                             
+
                 PickUp(hit.collider.gameObject);
             }
             Debug.Log(hit.collider.gameObject.name);
@@ -179,6 +153,79 @@ public class PickupObject : MonoBehaviour
         currentState = PlacementState.EmptyHanded;
         Debug.Log("Estado actual: " + currentState);
     }
+
+
+    public bool IsPlacing() // para referenciar el estado placing en otros codigos como el del UI
+    {
+        return currentState == PlacementState.Placing;
+    }
+
+
+    private bool CheckCollisions(RaycastHit hit)
+    {
+        Vector3 overlapCenter = pickedObject.transform.TransformPoint(pickedObjectCollider.center); //Donde esta el centro en coordenadas del mundo (por eso Vector3) 
+        Vector3 halfExtents = Vector3.Scale(pickedObjectCollider.size, pickedObject.transform.lossyScale) / 2; //lossyScale considera la escala aproximada final en el mundo, no de los padres
+
+        Collider[] overlaps = Physics.OverlapBox(overlapCenter, halfExtents, pickedObject.transform.rotation);
+
+        foreach (Collider collider in overlaps) // FOR EACH por cada COLLIDER elemento de tipo Collider durante esta vuelta COLLIDER le voy a llamar collider IN  dentro del array
+        {
+            if (collider == pickedObjectCollider)
+            {
+                continue; //continue literalmente le dice al codigo que siga avanzando
+            }
+
+            if (collider == hit.collider)
+            {
+                continue;
+            }
+
+            return false;
+
+        }
+        return true;
+
+    }
+
+    private void ConfirmPlacement()
+    {
+        currentState = PlacementState.EmptyHanded;
+        if (pickedObject != null)
+        {
+            pickedObjectRb.isKinematic = false;
+        }
+        pickedObjectRenderer.material = originalMaterial;
+        pickedObject = null;
+        pickedObjectRb = null;
+        pickedObjectCollider = null;
+        pickedObjectRenderer = null;
+    }
+
+    private void UpdateMaterial(bool canPlace) //Solo pasa SI se puede poner.
+    {
+        if (canPlace)
+        {
+            pickedObjectRenderer.material = validMaterial;
+        }
+        else
+        {
+            pickedObjectRenderer.material = invalidMaterial;
+        }
+    }
+    private void StartPlacing()
+    {
+        pickedObject.transform.SetParent(null);
+        currentState = PlacementState.Placing;
+    }
+
+    private void CancelPlacing()
+    {
+        pickedObject.transform.SetParent(handPoint);
+        pickedObject.transform.localPosition = Vector3.zero;
+        pickedObjectRenderer.material = originalMaterial;
+        currentState = PlacementState.Holding;
+    }
+
 
 }
 
