@@ -33,7 +33,7 @@ public class PickupObject : MonoBehaviour
         switch (currentState)
         {
             case PlacementState.EmptyHanded:
-                Debug.Log("EmptyHanded");
+                
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
                     TryPickUp();
