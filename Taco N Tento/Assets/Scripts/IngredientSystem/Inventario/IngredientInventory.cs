@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class IngredientInventory : MonoBehaviour
 {
+
+    [SerializeField] private IngredientData ingrediente;
+
     private Dictionary<IngredientData, int> ingredients = new Dictionary<IngredientData, int>();
 
     public void AgregarIngredientes(IngredientData ingrediente, int cantidad)

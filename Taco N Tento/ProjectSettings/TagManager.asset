@@ -7,6 +7,7 @@ TagManager:
   - Ingrediente
   - PlacementSurface
   - Interactuable
+  - Contenedor
   layers:
   - Default
   - TransparentFX
