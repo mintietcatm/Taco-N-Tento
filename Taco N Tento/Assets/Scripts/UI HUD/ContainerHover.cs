@@ -44,8 +44,15 @@ public class ContainerHover : MonoBehaviour
 
             if (hit.collider.CompareTag("Contenedor")) // tiene el tag de contenedor
             {
+                IngredientContainer container = hit.collider.GetComponent<IngredientContainer>();
+
                 PanelDetalles.SetActive(true);
                 ContainerDescription.text = hit.collider.gameObject.name;
+
+                if (container != null)
+                {
+                    Debug.Log("Contenedor encontrado");
+                }
 
             }
             else //si no es contenedor se borra el texto
