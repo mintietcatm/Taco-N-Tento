@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6531299234649250192}
   - component: {fileID: 3705734521820177996}
   - component: {fileID: 2071282246821253096}
+  - component: {fileID: -5685243849530727226}
   m_Layer: 0
   m_Name: TortillasHarina
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: 2cb2651b1cda475449101284db0a1233, type: 2}
+  nombreAlternativo: 
 --- !u!65 &2071282246821253096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.40103203, y: 0.175155, z: 0.537149}
   m_Center: {x: 0, y: 0.0978057, z: -0.068574496}
+--- !u!114 &-5685243849530727226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7030574955461531792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

@@ -4,6 +4,7 @@ using UnityEngine;
 public class ItemNameHUD : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI ItemNameTxt;
+    [SerializeField] private TextMeshProUGUI InteractionHint;
     [SerializeField] private RaycastDetector raycastDetector;
     [SerializeField] private PickupObject pickupObject; //de PickupObject sacamos el placement state. Aqui referencio el componente para poder mandar a llamar el metodo
 
@@ -18,6 +19,7 @@ public class ItemNameHUD : MonoBehaviour
         if (pickupObject.IsPlacing()) // este metodo revisa si estamos en Placing y quita el texto del UI para que no estorbe
         {
             ItemNameTxt.text = "";
+            InteractionHint.text = "";
             return;
         }
 
@@ -27,17 +29,30 @@ public class ItemNameHUD : MonoBehaviour
 
             if (hit.collider.CompareTag("Interactuable")) // tiene el tag de interactuable
             {
-                ItemNameTxt.text = hit.collider.gameObject.name;
+                InteractableData datosInteractuables = hit.collider.gameObject.GetComponent<InteractableData>();
+
+                if (datosInteractuables != null)
+                {
+                    ItemNameTxt.text = datosInteractuables.ObtenerNombre();
+                    InteractionHint.text = "[Click Izq] Interactuar";
+                }
+                else
+                {
+                    ItemNameTxt.text = "";
+                    InteractionHint.text = "";
+                }
             }
             else //si no tiene interactuable se borra el texto
             {
                 ItemNameTxt.text = "";
+                InteractionHint.text = "";
             }
         }
 
         else // si no golpea nada no ponemos nada en el ui
         {
             ItemNameTxt.text = "";
+            InteractionHint.text = "";
         }
 
     }

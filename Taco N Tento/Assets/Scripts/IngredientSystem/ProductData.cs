@@ -11,4 +11,9 @@ public class ProductData : ScriptableObject
     [SerializeField] private GameObject Modelo;
     [SerializeField] private IngredientData IngredienteResultado; // IMPORTANTEEEE Debe referenciarse IngredientData especificamente, no ScriptableObject porque es demasiado general. Asi Unity ya sabe donde buscar. 
     [SerializeField] private int CantidadProducidad;
+
+    public string ObtenerNombre()
+    {
+        return Nombre;
+    }
 }

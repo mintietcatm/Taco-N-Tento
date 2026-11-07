@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6682772993610942141}
   - component: {fileID: 6949537976758752972}
   - component: {fileID: 4995351105122242312}
+  - component: {fileID: 6840475087567884173}
   m_Layer: 0
   m_Name: PorCilantro
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: e4d50fbeea103f34aa56427edae50a05, type: 2}
+  nombreAlternativo: 
 --- !u!65 &4995351105122242312
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2288852, y: 0.0914468, z: 0.2}
   m_Center: {x: 0, y: 0.0539456, z: 0}
+--- !u!114 &6840475087567884173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3593959951778955410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

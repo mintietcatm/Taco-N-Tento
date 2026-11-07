@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8091873628763475280}
   - component: {fileID: 203306035424175569}
   - component: {fileID: 487702059437882269}
+  - component: {fileID: -7579953886533564078}
   m_Layer: 0
   m_Name: Cilantro
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: ab124d343d424f648ad3048a163b6501, type: 2}
+  nombreAlternativo: 
 --- !u!65 &487702059437882269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3336208, y: 0.0771078, z: 0.0810756}
   m_Center: {x: -0.049999993, y: 0.029215103, z: 0}
+--- !u!114 &-7579953886533564078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8023119817028313478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

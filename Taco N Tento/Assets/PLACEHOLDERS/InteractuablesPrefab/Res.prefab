@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 902550350415511122}
   - component: {fileID: 5746317856272811507}
   - component: {fileID: 7969043006994085620}
+  - component: {fileID: 7811915538491076468}
   m_Layer: 0
   m_Name: Res
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: 6e042d00b4ce13e488b2150561dcfb72, type: 2}
+  nombreAlternativo: 
 --- !u!65 &7969043006994085620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4153664, y: 0.0478868, z: 0.6550952}
   m_Center: {x: 0, y: 0.0350478, z: 0}
+--- !u!114 &7811915538491076468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905836646948045299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

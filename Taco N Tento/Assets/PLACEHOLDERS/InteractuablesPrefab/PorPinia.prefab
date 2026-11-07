@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2605684258160292003}
   - component: {fileID: 919795176418581029}
   - component: {fileID: 1791244830123992402}
+  - component: {fileID: 3067934815746185120}
   m_Layer: 0
   m_Name: PorPinia
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: d1da39e981bf92645a0abc0b66c2081f, type: 2}
+  nombreAlternativo: 
 --- !u!65 &1791244830123992402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2288852, y: 0.0914468, z: 0.2}
   m_Center: {x: 0, y: 0.052755803, z: 0}
+--- !u!114 &3067934815746185120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447555768924928778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

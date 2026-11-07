@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9016927242430149985}
   - component: {fileID: 1848159184908283802}
   - component: {fileID: 5796742566828025115}
+  - component: {fileID: 2689293360828832370}
   m_Layer: 0
   m_Name: Cebolla
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: 6119a886e6cf9c5419c56fe345993211, type: 2}
+  nombreAlternativo: 
 --- !u!65 &5796742566828025115
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1673496, y: 0.13386899, z: 0.14492899}
   m_Center: {x: -0.005034603, y: 0.077965096, z: -0.00000010058284}
+--- !u!114 &2689293360828832370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173286224557648163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

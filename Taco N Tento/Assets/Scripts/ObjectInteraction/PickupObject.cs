@@ -11,6 +11,8 @@ public class PickupObject : MonoBehaviour
     private Renderer pickedObjectRenderer;
     private Material originalMaterial = null;  //el material original
 
+    private InteractableData datosInteractuables = null;
+
     private GameObject pickedObject = null; // que tenemos en la mano
     private Rigidbody pickedObjectRb = null;
     private BoxCollider pickedObjectCollider = null; // El collider del objeto que estamos agarrando
@@ -106,7 +108,7 @@ public class PickupObject : MonoBehaviour
         if (raycastDetector.Hit())
         {
             RaycastHit hit = raycastDetector.GetHit(); // usando el raycast de RaycastDectector
-            if (hit.collider.CompareTag("Interactuable"))
+            if (hit.collider.CompareTag("Interactuable")&&hit.collider.GetComponent<Pickupable>()!=null)
             {
 
                 PickUp(hit.collider.gameObject);
@@ -119,10 +121,24 @@ public class PickupObject : MonoBehaviour
     private void PickUp(GameObject objectToPickUp)
     {
         pickedObject = objectToPickUp;
+
+        datosInteractuables = pickedObject.GetComponent<InteractableData>();
+
+        if (datosInteractuables != null)
+        {
+            if (datosInteractuables.ObtenerDatos() is IngredientData ingrediente)
+            {
+                Debug.Log(ingrediente.ObtenerNombre());
+            }
+        }
+
+
         pickedObjectRb = pickedObject.GetComponent<Rigidbody>();
         pickedObjectCollider = pickedObject.GetComponent<BoxCollider>();
         pickedObjectRenderer = pickedObject.GetComponent<Renderer>();
         originalMaterial = pickedObjectRenderer.material; //Aqui se guarda el material original del objeto, para no tener que asignarlo manualmente en el inspector
+
+
 
         if (pickedObjectRb != null)
         {
@@ -192,7 +208,7 @@ public class PickupObject : MonoBehaviour
         currentState = PlacementState.EmptyHanded;
         if (pickedObject != null)
         {
-            pickedObjectRb.isKinematic = false;
+            pickedObjectRb.isKinematic = true;
         }
         pickedObjectRenderer.material = originalMaterial;
         pickedObject = null;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6190135730405391707}
   - component: {fileID: 2333656199850417626}
   - component: {fileID: 8268573487216944121}
+  - component: {fileID: 5040850483672421132}
   m_Layer: 0
   m_Name: MedLimon
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: a983023e6e41edf4281ea3319914cc9b, type: 2}
+  nombreAlternativo: 
 --- !u!65 &8268573487216944121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0918184, y: 0.035602, z: 0.0795172}
   m_Center: {x: 0, y: 0.0216246, z: 0}
+--- !u!114 &5040850483672421132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943468687581795232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

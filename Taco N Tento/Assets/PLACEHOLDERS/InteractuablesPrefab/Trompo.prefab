@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: 4dffd4f176367b34fac9e4eb820cd7cf, type: 2}
+  nombreAlternativo: 
 --- !u!64 &5993486288722606049
 MeshCollider:
   m_ObjectHideFlags: 0

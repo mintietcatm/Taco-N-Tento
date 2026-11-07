@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6886354956248958751}
   - component: {fileID: 1144124383119822089}
   - component: {fileID: 5203402831253024922}
+  - component: {fileID: -6709277430222377348}
   m_Layer: 0
   m_Name: Limon
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: 4bcc1a0ca2c2005429532cc824f383b8, type: 2}
+  nombreAlternativo: 
 --- !u!65 &5203402831253024922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0918186, y: 0.09181859, z: 0.0795172}
   m_Center: {x: 0.0010668989, y: 0.0524791, z: 0}
+--- !u!114 &-6709277430222377348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6908379101999860653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

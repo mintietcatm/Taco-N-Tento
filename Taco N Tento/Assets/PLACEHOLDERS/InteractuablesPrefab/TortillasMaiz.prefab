@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4124522467449610712}
   - component: {fileID: 6619099973651389774}
   - component: {fileID: 3528343657136437933}
+  - component: {fileID: 7017955861459466857}
   m_Layer: 0
   m_Name: TortillasMaiz
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: afb6b8acb8f15fc468236d47bc88d6f6, type: 2}
+  nombreAlternativo: 
 --- !u!65 &3528343657136437933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.47104403, y: 0.5207202, z: 0.47104403}
   m_Center: {x: 0, y: 0.2665061, z: 0}
+--- !u!114 &7017955861459466857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4970721794937616739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable

@@ -10,6 +10,9 @@ public class IngredientData : ScriptableObject
     [SerializeField] TipoDeIngrediente ingredienteActual;
     [SerializeField] private GameObject Modelo;
 
-
+    public string ObtenerNombre()
+    {
+        return Nombre;
+    }
 
 }

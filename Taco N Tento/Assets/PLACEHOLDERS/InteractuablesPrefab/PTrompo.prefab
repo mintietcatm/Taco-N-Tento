@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8818172004830318513}
   - component: {fileID: 1486387786304613605}
   - component: {fileID: 1571559290931185147}
+  - component: {fileID: 7720884316392982831}
   m_Layer: 0
   m_Name: PTrompo
   m_TagString: Interactuable
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableData
   scriptableObject: {fileID: 11400000, guid: c60765f624b2f954aad1288fa337c55c, type: 2}
+  nombreAlternativo: 
 --- !u!65 &1571559290931185147
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,3 +156,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1965668, y: 0.0515084, z: 0.2490172}
   m_Center: {x: 0, y: 0.0332176, z: 0}
+--- !u!114 &7720884316392982831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860959341638573063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable
