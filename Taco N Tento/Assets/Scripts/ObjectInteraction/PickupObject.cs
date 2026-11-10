@@ -12,6 +12,8 @@ public class PickupObject : MonoBehaviour
     private Material originalMaterial = null;  //el material original
 
     private InteractableData datosInteractuables = null;
+    private TacoAssembly tacoDetectado = null;
+    float alturaFinal;
 
     private GameObject pickedObject = null; // que tenemos en la mano
     private Rigidbody pickedObjectRb = null;
@@ -35,7 +37,7 @@ public class PickupObject : MonoBehaviour
         switch (currentState)
         {
             case PlacementState.EmptyHanded:
-                
+
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
                     TryPickUp();
@@ -66,9 +68,24 @@ public class PickupObject : MonoBehaviour
 
                 if (raycastDetector.DetectSurface(placeableLayer, out hit))
                 {
-                    pickedObject.transform.position = hit.point;
+                    pickedObject.transform.position = hit.point + Vector3.up * pickedObjectCollider.bounds.extents.y;
 
                     bool canPlace = CheckCollisions(hit); // llamamos al metodo que revisa los colliders
+
+                    if (tacoDetectado != null)
+                    {
+                        Collider tortillaCollider = tacoDetectado.GetComponent<Collider>(); //saca el collider de la tortilla
+                        float alturaTortilla = tortillaCollider.bounds.max.y; //para que no se clipee
+
+                        float diferenciaAltura = alturaTortilla - pickedObjectCollider.bounds.min.y; //ok aqui basicamente esa funcion toma el punto de contacto del collider en lugar del pivote. Para que la carne no quede ni clipeada a la tortilla ni flotando
+                        Vector3 nuevaPosicion = pickedObject.transform.position;
+
+                        nuevaPosicion.y += diferenciaAltura; //le añadimos la diferencia a la nueva posicion
+                        pickedObject.transform.position = nuevaPosicion;
+                       
+
+                    }
+
                     UpdateMaterial(canPlace); // llamamos al metodo que tiene los materiales
 
                     if (Mouse.current.leftButton.wasPressedThisFrame && canPlace == true)
@@ -87,6 +104,8 @@ public class PickupObject : MonoBehaviour
 
         }
     }
+
+    #region PlaceObject, sistema de colocar objetos, poner material bool true y material falso. 
 
     private void RotateObject() //para rotar con el mouse
     {
@@ -108,7 +127,7 @@ public class PickupObject : MonoBehaviour
         if (raycastDetector.Hit())
         {
             RaycastHit hit = raycastDetector.GetHit(); // usando el raycast de RaycastDectector
-            if (hit.collider.CompareTag("Interactuable")&&hit.collider.GetComponent<Pickupable>()!=null)
+            if (hit.collider.CompareTag("Interactuable") && hit.collider.GetComponent<Pickupable>() != null)
             {
 
                 PickUp(hit.collider.gameObject);
@@ -121,6 +140,13 @@ public class PickupObject : MonoBehaviour
     private void PickUp(GameObject objectToPickUp)
     {
         pickedObject = objectToPickUp;
+        Pickupable porcion = pickedObject.GetComponent<Pickupable>();
+
+        if (porcion != null)
+        {
+            porcion.QuitarDelTaco();
+        } 
+            
 
         datosInteractuables = pickedObject.GetComponent<InteractableData>();
 
@@ -144,7 +170,15 @@ public class PickupObject : MonoBehaviour
         {
             pickedObjectRb.linearVelocity = Vector3.zero; //representa el cambio de la posicion, la velocidad en xyz ahora es 0
             pickedObjectRb.angularVelocity = Vector3.zero;
-            pickedObjectRb.isKinematic = true; //Controla si la fisica afecta al rb del objeto
+
+            if (!pickedObjectRb.isKinematic)
+            {
+
+                pickedObjectRb.isKinematic = true; //Controla si la fisica afecta al rb del objeto
+
+                pickedObjectRb.detectCollisions = false;// Para que no mande a volar las otras cosas. Ya. ya me canse de que eso pase. 
+            }
+
         }
 
         pickedObject.transform.SetParent(handPoint);
@@ -162,6 +196,7 @@ public class PickupObject : MonoBehaviour
         if (pickedObjectRb != null) //comprueba si tiene un rigidbody
         {
             pickedObjectRb.isKinematic = false; //reactivamos las fisicas del objeto para que se caiga
+            pickedObjectRb.detectCollisions = true;
         }
         pickedObject = null;
         pickedObjectRb = null; //Para que el codigo no se quede con la informacion
@@ -179,6 +214,7 @@ public class PickupObject : MonoBehaviour
 
     private bool CheckCollisions(RaycastHit hit)
     {
+        tacoDetectado = null; //limpiamos referencia
         Vector3 overlapCenter = pickedObject.transform.TransformPoint(pickedObjectCollider.center); //Donde esta el centro en coordenadas del mundo (por eso Vector3) 
         Vector3 halfExtents = Vector3.Scale(pickedObjectCollider.size, pickedObject.transform.lossyScale) / 2; //lossyScale considera la escala aproximada final en el mundo, no de los padres
 
@@ -196,6 +232,14 @@ public class PickupObject : MonoBehaviour
                 continue;
             }
 
+            TacoAssembly taco = collider.GetComponent<TacoAssembly>();
+
+            if (taco != null && datosInteractuables != null && datosInteractuables.ObtenerDatos() is IngredientData)
+            {
+                Debug.Log("Hola soy una tortilla");
+                tacoDetectado = taco;
+                continue;
+            }
             return false;
 
         }
@@ -205,10 +249,24 @@ public class PickupObject : MonoBehaviour
 
     private void ConfirmPlacement()
     {
+        if (tacoDetectado != null && datosInteractuables != null)
+        {
+            if (datosInteractuables.ObtenerDatos() is IngredientData ingrediente)
+            {
+                tacoDetectado.AgregarIngrediente(ingrediente,pickedObject);
+                Pickupable porcion = pickedObject.GetComponent<Pickupable>();
+                if (porcion != null)
+                {
+                    porcion.AsignarTaco(tacoDetectado);
+                }
+            }
+        }
         currentState = PlacementState.EmptyHanded;
         if (pickedObject != null)
         {
             pickedObjectRb.isKinematic = true;
+
+            pickedObjectRb.detectCollisions = true;
         }
         pickedObjectRenderer.material = originalMaterial;
         pickedObject = null;
@@ -242,6 +300,24 @@ public class PickupObject : MonoBehaviour
         currentState = PlacementState.Holding;
     }
 
+    #endregion
+
+    #region Armado de Tacos
+
+    private TacoAssembly DetectarTaco()
+    {
+        Vector3 origen = pickedObject.transform.position;
+        RaycastHit hit;
+
+        if (Physics.Raycast(origen, Vector3.down, out hit, 0.5f))
+        {
+            Debug.Log(hit.collider.gameObject.name);
+        }
+
+        return null;
+    }
+
+    #endregion
 
 }
 

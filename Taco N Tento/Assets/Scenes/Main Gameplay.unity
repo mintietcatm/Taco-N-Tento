@@ -14180,6 +14180,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3753933455930102583, guid: d0ac77fe29493be47a23313fa1d85dc5, type: 3}
   m_PrefabInstance: {fileID: 8290349254931315537}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1133651683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 50577053407998225, guid: d11c34a9f01dfc0468000063c95d50ab, type: 3}
+  m_PrefabInstance: {fileID: 2815667473145701972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1199631734
 Mesh:
   m_ObjectHideFlags: 0
@@ -22859,6 +22864,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6597800944170786336, guid: d11c34a9f01dfc0468000063c95d50ab, type: 3}
   m_PrefabInstance: {fileID: 2815667473145701972}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1603574510963599611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133651683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd6e3eda8918f347a716b411e6416e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TacoAssembly
+  ingredientes: []
 --- !u!1001 &1663269868167210560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23284,7 +23302,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 50577053407998225, guid: d11c34a9f01dfc0468000063c95d50ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1603574510963599611}
   m_SourcePrefab: {fileID: 100100000, guid: d11c34a9f01dfc0468000063c95d50ab, type: 3}
 --- !u!1001 &2880574368740421826
 PrefabInstance:
