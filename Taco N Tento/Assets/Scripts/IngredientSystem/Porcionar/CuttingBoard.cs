@@ -27,6 +27,19 @@ public class CuttingBoard : MonoBehaviour
         {
             return false;
         }
+        ProductData datosProducto = productoActual.ObtenerProducto();
+
+        if (datosProducto==null)
+        {
+            return false;
+        }
+
+        IngredientData ingredienteResultado = datosProducto.ObtenerIngredienteResultado();
+
+        if (ingredienteResultado==null||inventario== null)
+        {
+            return false;
+        }
 
         int porcionesRestantes = productoActual.ObtenerCantidadRestante();
         if (porcionesRestantes < 2)
@@ -45,6 +58,15 @@ public class CuttingBoard : MonoBehaviour
         {
             return false;
         }
+
+        inventario.AgregarIngredientes(ingredienteResultado,  porcionesACortar);
+
+        if (productoActual.ObtenerCantidadRestante() <= 0)
+        {
+            Destroy(productoActual.gameObject);
+            RetirarProducto();
+        }
+
         return true;
 
     }
