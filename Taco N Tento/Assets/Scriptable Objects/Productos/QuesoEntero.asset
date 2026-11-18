@@ -19,4 +19,4 @@ MonoBehaviour:
   productoActual: 4
   Modelo: {fileID: 3305114239471770234, guid: e9f7cd304249c9741ae62541eb8cadc5, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: db96b684cd05b4b4c887add7fe5ba8e7, type: 2}
-  CantidadProducidad: 4
+  CantidadProducida: 4

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ContainerHover : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class ContainerHover : MonoBehaviour
     #region Elementos en el canvas
     [SerializeField] TextMeshProUGUI ContainerDescription;
     [SerializeField] TextMeshProUGUI ContainerContent;
+    [SerializeField] Image ContentImage;
     [SerializeField] private GameObject PanelDetalles; //El panel que tiene toda la información
 
     #endregion
@@ -22,6 +24,7 @@ public class ContainerHover : MonoBehaviour
         //Agregamos alerta por si algo no esta referenciado
         ContainerDescription.text = "Missing ref!";
         ContainerContent.text = "Missing ref!";
+        
 
         if (PanelDetalles == null)
         {
@@ -55,7 +58,7 @@ public class ContainerHover : MonoBehaviour
 
                     int cantidad = container.ObtenerCantidadActual();
                     int maxCantidad = container.ObtenerCapacidadMaxima();
-
+                   
                     ContainerContent.text = $"{cantidad} / {maxCantidad}";
 
                 }

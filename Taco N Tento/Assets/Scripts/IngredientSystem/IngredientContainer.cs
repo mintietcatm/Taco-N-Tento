@@ -11,6 +11,8 @@ public class IngredientContainer : MonoBehaviour
         return cantidadActual;
     }
 
+   
+
     public int ObtenerCapacidadMaxima()
     {
         return capacidadMaxima;

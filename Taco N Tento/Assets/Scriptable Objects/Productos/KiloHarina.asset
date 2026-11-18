@@ -19,4 +19,4 @@ MonoBehaviour:
   productoActual: 0
   Modelo: {fileID: 7030574955461531792, guid: efe1a61cf57ef694fb2ff090b7371b74, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: 9ab9c70a76e47084592a819897ecd376, type: 2}
-  CantidadProducidad: 25
+  CantidadProducida: 20
