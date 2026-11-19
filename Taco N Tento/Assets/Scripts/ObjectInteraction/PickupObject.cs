@@ -13,6 +13,8 @@ public class PickupObject : MonoBehaviour
 
     private InteractableData datosInteractuables = null;
     private TacoAssembly tacoDetectado = null;
+
+    private CuttingBoard tablaDetectada = null;
     float alturaFinal;
 
     private GameObject pickedObject = null; // que tenemos en la mano
@@ -70,7 +72,22 @@ public class PickupObject : MonoBehaviour
                 {
                     pickedObject.transform.position = hit.point + Vector3.up * pickedObjectCollider.bounds.extents.y;
 
+                    tablaDetectada = hit.collider.GetComponent<CuttingBoard>();
+
                     bool canPlace = CheckCollisions(hit); // llamamos al metodo que revisa los colliders
+
+                        ProductInstance producto = pickedObject.GetComponent<ProductInstance>();
+
+                    if (tablaDetectada != null && tablaDetectada.EstaDisponible() == false ) //si la existe Y NO esta desocupada
+                    {
+                        canPlace = false;
+
+                    }
+
+                    if (tablaDetectada != null && producto== null ) // si la tabla existe pero el objeto que traemos en la mano no es un Producto
+                    {
+                        canPlace = false;
+                    }
 
                     if (tacoDetectado != null)
                     {
