@@ -27,4 +27,9 @@ public class ProductData : ScriptableObject
     {
         return CantidadProducida;
     }
+
+    public bool ObtenerSePuedeCortar()
+    {
+        return SePuedeCortar;
+    }
 }

@@ -70,21 +70,37 @@ public class PickupObject : MonoBehaviour
 
                 if (raycastDetector.DetectSurface(placeableLayer, out hit))
                 {
-                    pickedObject.transform.position = hit.point + Vector3.up * pickedObjectCollider.bounds.extents.y;
+                    float alturaDesdePivote = (pickedObjectCollider.size.y / 2f - pickedObjectCollider.center.y) * pickedObject.transform.lossyScale.y;
 
+                    pickedObject.transform.position = hit.point + Vector3.up * alturaDesdePivote;
                     tablaDetectada = hit.collider.GetComponent<CuttingBoard>();
 
                     bool canPlace = CheckCollisions(hit); // llamamos al metodo que revisa los colliders
 
-                        ProductInstance producto = pickedObject.GetComponent<ProductInstance>();
+                    
+                    Debug.Log("Colocar:" + canPlace);
 
-                    if (tablaDetectada != null && tablaDetectada.EstaDisponible() == false ) //si la existe Y NO esta desocupada
+                    ProductInstance producto = pickedObject.GetComponent<ProductInstance>();
+
+                    if (tablaDetectada != null && tablaDetectada.EstaDisponible() == false) //si la existe Y NO esta desocupada
                     {
                         canPlace = false;
 
                     }
 
-                    if (tablaDetectada != null && producto== null ) // si la tabla existe pero el objeto que traemos en la mano no es un Producto
+                    if (tablaDetectada != null && producto == null) // si la tabla existe pero el objeto que traemos en la mano no es un Producto
+                    {
+                        canPlace = false;
+                    }
+
+                    ProductData datosProducto = null;
+
+                    if (producto != null)
+                    {
+                        datosProducto = producto.ObtenerProducto();
+                    }
+
+                    if (tablaDetectada != null && (datosProducto == null || !datosProducto.ObtenerSePuedeCortar()))
                     {
                         canPlace = false;
                     }
@@ -99,7 +115,7 @@ public class PickupObject : MonoBehaviour
 
                         nuevaPosicion.y += diferenciaAltura; //le añadimos la diferencia a la nueva posicion
                         pickedObject.transform.position = nuevaPosicion;
-                       
+
 
                     }
 
@@ -109,9 +125,14 @@ public class PickupObject : MonoBehaviour
                     {
                         ConfirmPlacement();
                     }
+
                     Debug.Log("colocar " + canPlace);
                     //Debug.Log(hit.point);
 
+                }
+                else
+                {
+                    tablaDetectada = null;
                 }
 
                 break;
@@ -162,8 +183,8 @@ public class PickupObject : MonoBehaviour
         if (porcion != null)
         {
             porcion.QuitarDelTaco();
-        } 
-            
+        }
+
 
         datosInteractuables = pickedObject.GetComponent<InteractableData>();
 
@@ -237,6 +258,8 @@ public class PickupObject : MonoBehaviour
 
         Collider[] overlaps = Physics.OverlapBox(overlapCenter, halfExtents, pickedObject.transform.rotation);
 
+        //FOREACH DEL COLLIDER 
+
         foreach (Collider collider in overlaps) // FOR EACH por cada COLLIDER elemento de tipo Collider durante esta vuelta COLLIDER le voy a llamar collider IN  dentro del array
         {
             if (collider == pickedObjectCollider)
@@ -257,6 +280,9 @@ public class PickupObject : MonoBehaviour
                 tacoDetectado = taco;
                 continue;
             }
+
+
+            Debug.Log("Colocar se bloquea por " + collider.gameObject.name);
             return false;
 
         }
@@ -270,7 +296,7 @@ public class PickupObject : MonoBehaviour
         {
             if (datosInteractuables.ObtenerDatos() is IngredientData ingrediente)
             {
-                tacoDetectado.AgregarIngrediente(ingrediente,pickedObject);
+                tacoDetectado.AgregarIngrediente(ingrediente, pickedObject);
                 Pickupable porcion = pickedObject.GetComponent<Pickupable>();
                 if (porcion != null)
                 {
@@ -278,6 +304,24 @@ public class PickupObject : MonoBehaviour
                 }
             }
         }
+
+        if (tablaDetectada != null && pickedObject != null)
+        {
+            ProductInstance producto = pickedObject.GetComponent<ProductInstance>();
+
+            if (producto != null)
+            {
+                ProductData datosProducto = producto.ObtenerProducto();
+
+                if (datosProducto != null && datosProducto.ObtenerSePuedeCortar())
+                {
+                    tablaDetectada.ColocarProducto(producto);
+
+                }
+
+            }
+        }
+
         currentState = PlacementState.EmptyHanded;
         if (pickedObject != null)
         {

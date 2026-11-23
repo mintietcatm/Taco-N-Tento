@@ -14148,11 +14148,13 @@ GameObject:
   - component: {fileID: 1106385698}
   - component: {fileID: 1106385697}
   - component: {fileID: 1106385696}
+  - component: {fileID: 1106385700}
   - component: {fileID: 1106385695}
   - component: {fileID: 1106385694}
-  m_Layer: 0
+  - component: {fileID: 1106385699}
+  m_Layer: 6
   m_Name: CuttingBoard
-  m_TagString: Untagged
+  m_TagString: Interactuable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14170,7 +14172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CuttingBoard
   inventario: {fileID: 678404868}
-  productoActual: {fileID: 1490278930}
+  productoActual: {fileID: 0}
 --- !u!65 &1106385695
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14187,7 +14189,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
@@ -14264,6 +14266,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1106385699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106385693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pickupable
+  tacoActual: {fileID: 0}
+--- !u!54 &1106385700
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106385693}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0.5
+  m_AngularDamping: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1115735972
 GameObject:
   m_ObjectHideFlags: 0
@@ -18882,7 +18924,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 799712421659149461, guid: 26e0bf06342bb764aba54d18fe2d5041, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.893
+      value: 2.576
       objectReference: {fileID: 0}
     - target: {fileID: 799712421659149461, guid: 26e0bf06342bb764aba54d18fe2d5041, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23895,7 +23937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6597800944170786336, guid: d11c34a9f01dfc0468000063c95d50ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.117419
+      value: 2.915
       objectReference: {fileID: 0}
     - target: {fileID: 6597800944170786336, guid: d11c34a9f01dfc0468000063c95d50ab, type: 3}
       propertyPath: m_LocalPosition.y
