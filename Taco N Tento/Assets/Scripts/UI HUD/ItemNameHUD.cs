@@ -29,6 +29,25 @@ public class ItemNameHUD : MonoBehaviour
 
             if (hit.collider.CompareTag("Interactuable")) // tiene el tag de interactuable
             {
+
+                CuttingBoard tabla = hit.collider.GetComponent<CuttingBoard>();
+
+                if (tabla != null)
+                {
+                    ItemNameTxt.text = "Tabla de Cortar";
+
+                    if (tabla.EstaDisponible())
+                    {
+                        InteractionHint.text = "[Click Izq] Recoger";
+                    }
+                    else
+                    {
+                        InteractionHint.text = "Tabla ocupada";
+                    }
+
+                    return;
+                }
+
                 InteractableData datosInteractuables = hit.collider.gameObject.GetComponent<InteractableData>();
 
                 if (datosInteractuables != null)

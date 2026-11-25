@@ -9,10 +9,27 @@ public class IngredientData : ScriptableObject
     [SerializeField] private Sprite Icono;
     [SerializeField] TipoDeIngrediente ingredienteActual;
     [SerializeField] private GameObject Modelo;
+    [SerializeField] private bool RequiereCoccion;
+    [SerializeField] private float TiempoCoccion;
+    [SerializeField] private float TiempoQuemado;
 
     public string ObtenerNombre()
     {
         return Nombre;
     }
 
+    public bool ObtenerRequiereCoccion()
+    {
+        return RequiereCoccion;
+    }
+
+    public float ObtenerTiempoCoccion()
+    {
+        return TiempoCoccion;
+    }
+
+    public float ObtenerTiempoQuemado()
+    {
+        return TiempoQuemado;
+    }
 }

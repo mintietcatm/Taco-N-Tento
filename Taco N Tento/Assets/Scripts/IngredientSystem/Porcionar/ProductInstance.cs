@@ -5,6 +5,7 @@ public class ProductInstance : MonoBehaviour
     [SerializeField] private InteractableData datosInteractuables; //accede al SO que tiene asignado el objeto fisico
     private ProductData producto; //guarda el SO como un ProductData
     [SerializeField] private int cantidadRestante;
+    private CuttingBoard tablaActual = null;
 
     private void Awake()
     {
@@ -42,6 +43,26 @@ public class ProductInstance : MonoBehaviour
     {
         return producto;
     }
+
+    public CuttingBoard ObtenerTabla()
+    {
+        return tablaActual;
+    }
+
+    public void AsignarLaTabla(CuttingBoard tabla)
+    {
+        tablaActual = tabla;    
+    }
+
+    public void QuitarDeLaTabla()
+    {
+        if (tablaActual != null)
+        {
+            tablaActual.RetirarProducto();
+            tablaActual = null;
+        }
+    }
+
 
     [ContextMenu("RetirarPorcion")]
     private void RetirarPorcion()

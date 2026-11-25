@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7227128420608673951}
   - component: {fileID: 6999445591333810195}
   - component: {fileID: 5170566280267680525}
+  - component: {fileID: 7244973456945372939}
   m_Layer: 0
   m_Name: PRes
   m_TagString: Interactuable
@@ -168,3 +169,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickupable
+  tacoActual: {fileID: 0}
+--- !u!114 &7244973456945372939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200063340494301517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff232c76e3ffdd04fb27e93c7079caa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientInstance
+  datosInteractuables: {fileID: 7227128420608673951}
+  estadoActual: 0
+  tiempoAcumulado: 0
+  ingredienteRenderer: {fileID: 3326360082654302337}
+  materialCrudo: {fileID: 2100000, guid: b1bef1842241aca44a0ef8ba22ccbf6b, type: 2}
+  materialCocinado: {fileID: 2100000, guid: 55b763bed5940064aaf955d7407bdff1, type: 2}
+  materialQuemado: {fileID: 2100000, guid: e3043d9cfc59ac6478af9332d4f0ffd2, type: 2}
+  isCooking: 0

@@ -20,3 +20,4 @@ MonoBehaviour:
   Modelo: {fileID: 927370240883285147, guid: 3d38c84d4f45a1f4faa814694d1fb82b, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: d1da39e981bf92645a0abc0b66c2081f, type: 2}
   CantidadProducida: 30
+  SePuedeCortar: 1

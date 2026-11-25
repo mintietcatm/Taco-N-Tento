@@ -18,3 +18,6 @@ MonoBehaviour:
   Icono: {fileID: 0}
   ingredienteActual: 0
   Modelo: {fileID: 3200063340494301517, guid: 5251e2b6c33be3d469a5033e06347aae, type: 3}
+  RequiereCoccion: 1
+  TiempoCoccion: 3
+  TiempoQuemado: 9

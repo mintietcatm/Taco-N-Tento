@@ -17,6 +17,8 @@ public class PickupObject : MonoBehaviour
     private CuttingBoard tablaDetectada = null;
     float alturaFinal;
 
+    private CookingStation comalDetectado = null;
+
     private GameObject pickedObject = null; // que tenemos en la mano
     private Rigidbody pickedObjectRb = null;
     private BoxCollider pickedObjectCollider = null; // El collider del objeto que estamos agarrando
@@ -50,7 +52,10 @@ public class PickupObject : MonoBehaviour
                 Debug.Log("Holding");
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
-                    Drop();
+                    if (!TryCut()) //para que revise si vamos a cortar algo antes de droppearlo
+                    {
+                        Drop();
+                    }
                 }
                 if (Mouse.current.rightButton.wasPressedThisFrame)
                 {
@@ -73,11 +78,14 @@ public class PickupObject : MonoBehaviour
                     float alturaDesdePivote = (pickedObjectCollider.size.y / 2f - pickedObjectCollider.center.y) * pickedObject.transform.lossyScale.y;
 
                     pickedObject.transform.position = hit.point + Vector3.up * alturaDesdePivote;
-                    tablaDetectada = hit.collider.GetComponent<CuttingBoard>();
+                    tablaDetectada = hit.collider.GetComponent<CuttingBoard>(); //si es una tabla
+                    comalDetectado = hit.collider.GetComponent<CookingStation>(); //si es un comal
+
+                    Debug.Log("Detectando " + hit.collider.gameObject.name);
 
                     bool canPlace = CheckCollisions(hit); // llamamos al metodo que revisa los colliders
 
-                    
+
                     Debug.Log("Colocar:" + canPlace);
 
                     ProductInstance producto = pickedObject.GetComponent<ProductInstance>();
@@ -165,6 +173,29 @@ public class PickupObject : MonoBehaviour
         if (raycastDetector.Hit())
         {
             RaycastHit hit = raycastDetector.GetHit(); // usando el raycast de RaycastDectector
+            CuttingBoard tabla = hit.collider.GetComponent<CuttingBoard>();
+
+            if (tabla != null && !tabla.EstaDisponible()) //para que no se pueda recoger la tabla si esta ocupada
+            {
+                return;
+            }
+
+            //dispensador de porciones (empaques basicamente)
+
+            DispensadorDePorciones dispensador = hit.collider.GetComponent<DispensadorDePorciones>(); //buscamos el script en el objeto al que esta tocando el raycast
+
+            if (dispensador != null)
+            {
+                GameObject porcion = dispensador.ExtraerPorcion(); //intentamos extraer
+
+                if (porcion != null) //si se puede se usa pickup
+                {
+                    PickUp(porcion);
+                }
+
+                return; //se termina TryPickUp para que no se agarre el empaque. 
+            }
+
             if (hit.collider.CompareTag("Interactuable") && hit.collider.GetComponent<Pickupable>() != null)
             {
 
@@ -185,6 +216,20 @@ public class PickupObject : MonoBehaviour
             porcion.QuitarDelTaco();
         }
 
+        ProductInstance producto = pickedObject.GetComponent<ProductInstance>();
+
+        if (producto != null)
+        {
+            producto.QuitarDeLaTabla();
+        }
+
+
+        IngredientInstance ingredienteFisico = pickedObject.GetComponent<IngredientInstance>(); //se para la coccion cuando recoges el ingrediente
+
+        if (ingredienteFisico != null)
+        {
+            ingredienteFisico.DetenerCoccion();
+        }
 
         datosInteractuables = pickedObject.GetComponent<InteractableData>();
 
@@ -209,13 +254,9 @@ public class PickupObject : MonoBehaviour
             pickedObjectRb.linearVelocity = Vector3.zero; //representa el cambio de la posicion, la velocidad en xyz ahora es 0
             pickedObjectRb.angularVelocity = Vector3.zero;
 
-            if (!pickedObjectRb.isKinematic)
-            {
+            pickedObjectRb.isKinematic = true; //Controla si la fisica afecta al rb del objeto
 
-                pickedObjectRb.isKinematic = true; //Controla si la fisica afecta al rb del objeto
-
-                pickedObjectRb.detectCollisions = false;// Para que no mande a volar las otras cosas. Ya. ya me canse de que eso pase. 
-            }
+            pickedObjectRb.detectCollisions = false;// Para que no mande a volar las otras cosas. Ya. ya me canse de que eso pase. 
 
         }
 
@@ -315,7 +356,10 @@ public class PickupObject : MonoBehaviour
 
                 if (datosProducto != null && datosProducto.ObtenerSePuedeCortar())
                 {
-                    tablaDetectada.ColocarProducto(producto);
+                    if (tablaDetectada.ColocarProducto(producto))
+                    {
+                        producto.AsignarLaTabla(tablaDetectada);
+                    }
 
                 }
 
@@ -328,6 +372,16 @@ public class PickupObject : MonoBehaviour
             pickedObjectRb.isKinematic = true;
 
             pickedObjectRb.detectCollisions = true;
+        }
+
+        if (comalDetectado != null && pickedObject != null) //checar si lo estamos poniendo en un comal
+        {
+            IngredientInstance ingrediente = pickedObject.GetComponent<IngredientInstance>();
+
+            if (ingrediente != null)
+            {
+                comalDetectado.ColocarIngrediente(ingrediente);
+            }
         }
         pickedObjectRenderer.material = originalMaterial;
         pickedObject = null;
@@ -359,6 +413,44 @@ public class PickupObject : MonoBehaviour
         pickedObject.transform.localPosition = Vector3.zero;
         pickedObjectRenderer.material = originalMaterial;
         currentState = PlacementState.Holding;
+    }
+
+    #endregion
+
+
+    #region Cuchillo, tabla de cortar y relacionado.
+
+    private bool TryCut()
+    {
+        if (pickedObject.GetComponent<Knife>() == null) //no traemos un cuchillo?????
+        {
+            return false; //va pues no
+        }
+
+        if (!raycastDetector.Hit())//no estamos apuntando a nada???
+        {
+            return false; // va pues tampoco
+        }
+        RaycastHit hit = raycastDetector.GetHit();
+        CuttingBoard tabla = hit.collider.GetComponent<CuttingBoard>();
+
+        if (tabla == null) //no detectamos una tabla?????
+        {
+            ProductInstance producto = hit.collider.GetComponent<ProductInstance>(); //pues buscamos un producto
+
+            if (producto != null) //ah pero si detectamos un producto
+            {
+                tabla = producto.ObtenerTabla(); //ps buscamos la tabla
+            }
+        }
+
+        if (tabla != null) //si hay tabla?????
+        {
+            tabla.Cortar(); //va pues cortamos
+            return true;
+        }
+
+        return false; //no se cumplio ni una de las condiciones. pos no ejecutamos nada
     }
 
     #endregion

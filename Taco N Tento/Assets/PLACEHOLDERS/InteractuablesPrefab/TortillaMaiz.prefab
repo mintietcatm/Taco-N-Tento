@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 8425464567375588010}
   - component: {fileID: 5556017982515326020}
   - component: {fileID: 7813541130904793272}
+  - component: {fileID: 8348882299599217919}
   - component: {fileID: -6927266362792168077}
+  - component: {fileID: 45571718253480847}
   m_Layer: 0
   m_Name: TortillaMaiz
   m_TagString: Interactuable
@@ -156,6 +158,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.644882, y: 0.052582145, z: 0.644882}
   m_Center: {x: 0, y: 0.005114734, z: 0}
+--- !u!114 &8348882299599217919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5560921433546862358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff232c76e3ffdd04fb27e93c7079caa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientInstance
+  datosInteractuables: {fileID: 5556017982515326020}
+  estadoActual: 0
+  tiempoAcumulado: 0
+  ingredienteRenderer: {fileID: 0}
+  materialCrudo: {fileID: 0}
+  materialCocinado: {fileID: 0}
+  materialQuemado: {fileID: 0}
+  isCooking: 0
 --- !u!114 &-6927266362792168077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,3 +190,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d4c7340dbd4fe43857dcd9ad511b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickupable
+  tacoActual: {fileID: 0}
+--- !u!114 &45571718253480847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5560921433546862358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd6e3eda8918f347a716b411e6416e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TacoAssembly
+  ingredientes: []
