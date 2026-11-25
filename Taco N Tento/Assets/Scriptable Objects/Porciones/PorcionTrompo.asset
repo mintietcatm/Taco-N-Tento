@@ -15,6 +15,9 @@ MonoBehaviour:
   Nombre: "Porci\xF3n de Pastor"
   Precio: 7
   Descripcion: "Porci\xF3n de carne al pastor."
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: 5d7879c1c870fdc4e8f5ebf1aa6db4fd, type: 3}
   ingredienteActual: 1
   Modelo: {fileID: 7860959341638573063, guid: 676ee6284e5cd094481899eb37aa50bf, type: 3}
+  RequiereCoccion: 0
+  TiempoCoccion: 0
+  TiempoQuemado: 0

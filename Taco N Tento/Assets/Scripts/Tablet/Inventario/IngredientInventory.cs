@@ -61,5 +61,9 @@ public class IngredientInventory : MonoBehaviour
 
     }
 
+    public Dictionary<IngredientData, int> ObtenerInventario()
+    {
+        return new Dictionary<IngredientData, int>(ingredients);
+    }
 
 }

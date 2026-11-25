@@ -46,6 +46,10 @@ public class PickupObject : MonoBehaviour
                 {
                     TryPickUp();
                 }
+                else if (Mouse.current.rightButton.wasPressedThisFrame)
+                {
+                    TryRefillContainer();
+                }
 
                 break;
             case PlacementState.Holding:
@@ -194,6 +198,21 @@ public class PickupObject : MonoBehaviour
                 }
 
                 return; //se termina TryPickUp para que no se agarre el empaque. 
+            }
+
+           
+            IngredientContainer recipiente = hit.collider.GetComponent<IngredientContainer>(); //buscamos el script del contenedor para checar si es un contenedor
+
+            if (recipiente != null)
+            {
+                GameObject porcion = recipiente.ExtraerPorcion();
+
+                if (porcion != null)
+                {
+                    PickUp(porcion);
+                }
+
+                return;
             }
 
             if (hit.collider.CompareTag("Interactuable") && hit.collider.GetComponent<Pickupable>() != null)
@@ -451,6 +470,28 @@ public class PickupObject : MonoBehaviour
         }
 
         return false; //no se cumplio ni una de las condiciones. pos no ejecutamos nada
+    }
+
+    #endregion
+
+    #region Contenedor e inventario
+
+    private void TryRefillContainer()
+    {
+        if (!raycastDetector.Hit()) //si no hay nada
+        {
+            return;
+        }
+
+        RaycastHit hit = raycastDetector.GetHit(); //referenciamos el raycastDetector
+
+        IngredientContainer recipiente = hit.collider.GetComponent<IngredientContainer>();
+
+        if (recipiente != null)
+        {
+            recipiente.RellenarRecipiente();
+        }
+
     }
 
     #endregion

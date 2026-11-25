@@ -32,4 +32,9 @@ public class IngredientData : ScriptableObject
     {
         return TiempoQuemado;
     }
+
+    public Sprite ObtenerIcono()
+    {
+        return Icono;
+    }
 }

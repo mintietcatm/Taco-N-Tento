@@ -15,7 +15,7 @@ MonoBehaviour:
   Nombre: Carne de Res
   Precio: 150
   Descripcion: Carne para preparar tacos. Rinde 15 tacos por pieza.
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: 5d7879c1c870fdc4e8f5ebf1aa6db4fd, type: 3}
   productoActual: 0
   Modelo: {fileID: 3905836646948045299, guid: faece6ae68a0c7145bb42391952a944a, type: 3}
   IngredienteResultado: {fileID: 11400000, guid: 790713e11571d2244821a4801e0ff4ce, type: 2}

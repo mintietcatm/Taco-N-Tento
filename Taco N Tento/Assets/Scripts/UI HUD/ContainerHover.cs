@@ -60,6 +60,17 @@ public class ContainerHover : MonoBehaviour
                     int maxCantidad = container.ObtenerCapacidadMaxima();
                    
                     ContainerContent.text = $"{cantidad} / {maxCantidad}";
+                    IngredientData ingrediente = container.ObtenerIngredienteActual();
+
+                    if (ingrediente != null)
+                    {
+                        ContentImage.sprite = ingrediente.ObtenerIcono();
+                        ContentImage.enabled = ContentImage.sprite != null;
+                    }
+                    else
+                    {
+                        ContentImage.enabled = false;
+                    }
 
                 }
                 else

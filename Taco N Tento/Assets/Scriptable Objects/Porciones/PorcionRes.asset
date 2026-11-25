@@ -15,7 +15,7 @@ MonoBehaviour:
   Nombre: "Porci\xF3n de Carne de Res"
   Precio: 10
   Descripcion: "Porci\xF3n de carne, lista para cocinar"
-  Icono: {fileID: 0}
+  Icono: {fileID: 21300000, guid: 5d7879c1c870fdc4e8f5ebf1aa6db4fd, type: 3}
   ingredienteActual: 0
   Modelo: {fileID: 3200063340494301517, guid: 5251e2b6c33be3d469a5033e06347aae, type: 3}
   RequiereCoccion: 1
